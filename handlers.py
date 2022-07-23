@@ -10,7 +10,12 @@ config = ConfigParser()
 config.read('auth.ini')
 API_TOKEN = config['auth_tg']['bot_token']
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S'
+)
+log = logging.getLogger(__name__)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
@@ -18,6 +23,7 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     with open('templates/start.html', 'r') as file:
+        log.info("new user!")
         await message.reply(file.read(), parse_mode=types.ParseMode.HTML)
 
 
@@ -43,7 +49,7 @@ async def voice_transcribe(ms: types.Message):
     cache_path = f"{cache_name}{ext}"
     await bot.download_file(file_path, cache_path)
     if os.path.exists(cache_path):
-        print('message recieved')
+        log.info("file %s recieved", cache_path)
         text = recognize_input(cache_path)
     else:
         raise OSError("path not found or file is not downloaded yet")
