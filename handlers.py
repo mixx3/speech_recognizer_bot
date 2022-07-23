@@ -45,7 +45,6 @@ async def voice_transcribe(ms: types.Message):
     if os.path.exists(cache_path):
         print('message recieved')
         text = recognize_input(cache_path)
-        os.remove(cache_path)
     else:
         raise OSError("path not found or file is not downloaded yet")
     await bot.send_message(ms.chat.id, text)
