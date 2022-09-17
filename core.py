@@ -46,7 +46,7 @@ def to_wav(file_path: str) -> str:
         with open(f"{full_name}.wav", 'wb') as outfile:
             sound.export(outfile, format='wav')
     elif exc == ".mp3":
-        log.info('mp3 file recieved')
+        log.info('mp3 file received')
         sound = AudioSegment.from_mp3(file_path)
         with open(f"{full_name}.wav", 'wb') as outfile:
             sound.export(outfile, format='wav')
@@ -54,7 +54,7 @@ def to_wav(file_path: str) -> str:
         log.warning("trying to code wav to wav")
         pass
     else:
-        log.error("other file format recieved: %s", file_path)
+        log.error("other file format received: %s", file_path)
         raise AttributeError("file can not be exported to wav")
     os.remove(file_path)
     return f"{full_name}.wav"
