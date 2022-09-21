@@ -29,7 +29,7 @@ class VideoNote(AudioBase):
         sound = AudioSegment.from_ogg(f"{file_name}.ogg")
         os.remove(f"{file_name}.ogg")
         with open(f"{file_name}.wav", "wb") as outfile:
-            self.sound.export(outfile, format="wav")
+            sound.export(outfile, format="wav")
         os.remove(self.file_path)
         self.file_path = f"{file_name}.wav"
 
@@ -52,6 +52,7 @@ class Audio(AudioBase):
         os.remove(self.file_path)
         self.file_path = f"{file_name}.wav"
 
+
 class Voice(AudioBase):
     def __init__(self, ms: types.Message, bot: Bot):
         super().__init__()
@@ -70,4 +71,3 @@ class Voice(AudioBase):
             sound.export(outfile, format="wav")
         os.remove(self.file_path)
         self.file_path = f"{file_name}.wav"
-

@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     """Application settings"""
 
     BOT_TOKEN: str
+    DB_DSN: PostgresDsn
 
     class Config:
         """Pydantic BaseSettings config"""
