@@ -1,3 +1,3 @@
-from .db import User, Action
+from .db import User, ActionInfo
 
-__all__ = ['User', 'Action']
+__all__ = ['User', 'ActionInfo']

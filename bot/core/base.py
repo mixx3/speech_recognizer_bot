@@ -28,7 +28,6 @@ class AudioBase:
 
     async def recognize_speech(self):
         await self.to_vaw()
-        print(self.file_path)
         assert self.file_path.endswith(".wav")
         r = sr.Recognizer()
         with sr.AudioFile(self.file_path) as source:

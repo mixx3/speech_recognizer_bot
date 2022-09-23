@@ -15,10 +15,8 @@ dp = Dispatcher(bot)
 async def recognize_voice(ms: types.Message):
     voice = Voice(ms, bot)
     text = await recognize(voice)
-    logger.debug("voice message!")
-    logger.debug(text)
     if not text:
-        await bot.send_message(ms.chat.id, "nonono")
+        await bot.send_message(ms.chat.id, "No text to transcribe")
     await bot.send_message(ms.chat.id, text)
 
 
@@ -26,9 +24,8 @@ async def recognize_voice(ms: types.Message):
 async def recognize_audio(ms: types.Message):
     audio = Audio(ms, bot)
     text = await recognize(audio)
-    logger.debug(text)
     if not text:
-        await bot.send_message(ms.chat.id, "nonono")
+        await bot.send_message(ms.chat.id, "No text to transcribe")
     await bot.send_message(ms.chat.id, text)
 
 
@@ -36,6 +33,8 @@ async def recognize_audio(ms: types.Message):
 async def recognize_video_note(ms: types.Message):
     video_note = VideoNote(ms, bot)
     text = await recognize(video_note)
+    if not text:
+        await bot.send_message(ms.chat.id, "No text to transcribe")
     await bot.send_message(ms.chat.id, text)
 
 

@@ -2,7 +2,7 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
+from bot.settings import get_settings
 from alembic import context
 
 # this is the Alembic Config object, which provides
@@ -58,7 +58,7 @@ def run_migrations_online() -> None:
 
     """
     configuration = config.get_section(config.config_ini_section)
-    configuration['sqlalchemy.url'] = settings.DB_DSN
+    configuration['sqlalchemy.url'] = get_settings().DB_DSN
 
     connectable = engine_from_config(
         configuration,

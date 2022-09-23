@@ -63,7 +63,3 @@ def to_wav(file_path: str) -> str:
 def recognize_input(input_path: str) -> str:
     new_path = to_wav(input_path)
     return recognize_speech(new_path)
-
-
-if __name__ == '__main__':
-    print(recognize_speech("/Users/new/PycharmProjects/speech_recognizer/cache/voice_2022-09-20 22:35:29.445561.wav"))
