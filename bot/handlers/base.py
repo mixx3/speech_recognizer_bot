@@ -4,11 +4,13 @@ from aiogram import types
 from bot.core.audio import Audio, Voice, VideoNote
 from bot.core.base import recognize
 from logging import getLogger
+from .db_utils import create_user_if_not_exists, get_session
 
 
 logger = getLogger(__name__)
 bot = Bot(get_settings().BOT_TOKEN)
 dp = Dispatcher(bot)
+session = get_session()
 
 
 @dp.message_handler(content_types=[types.ContentType.VOICE])
@@ -40,6 +42,7 @@ async def recognize_video_note(ms: types.Message):
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
+    create_user_if_not_exists(session, message.chat.id)
     await message.reply("Hi")
 
 
