@@ -12,7 +12,7 @@ def get_session():
 
 async def create_user_if_not_exists(session: Session, tg_id: int) -> None:
     res = session.query(User).filter(User.chat_id == tg_id)
-    user = User(telegram_id=tg_id)
+    user = User(chat_id=tg_id)
     if not res.one_or_none():
         session.add(user)
     else:
