@@ -21,7 +21,9 @@ async def create_user_if_not_exists(session: Session, tg_id: int) -> None:
 
 
 async def post_action(session: Session, user_tg_id: int, action: str) -> None:
-    user_id = session.query(User).filter(User.chat_id == user_tg_id).one().id
-    db_action = ActionInfo(user_id=user_id, user_action=action)
+    user = session.query(User).filter(User.chat_id == user_tg_id)
+    user.update(dict(chat_id=user_tg_id))
+    db_action = ActionInfo(user_id=user.one().id, user_action=action)
     session.add(db_action)
     session.flush()
+
