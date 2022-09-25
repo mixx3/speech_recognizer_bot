@@ -11,12 +11,16 @@ def get_session():
 
 
 def create_user_if_not_exists(session: Session, tg_id: int):
-    res = session.query(User).filter(User.telegram_id == tg_id).one_or_none()
-    if not res:
-        user = User(telegram_id=tg_id)
+    res = session.query(User).filter(User.telegram_id == tg_id)
+    user = User(telegram_id=tg_id)
+    if not res.one_or_none():
         session.add(user)
     else:
-        res.update()
+        res.update(dict(telegram_id=tg_id))
 
 
-
+def post_action(session: Session, user_tg_id: int, action: ActionType):
+    user_id = session.query(User).filter(User.telegram_id == user_tg_id).one().id
+    db_action = ActionInfo(user_id=user_id, user_action=action)
+    session.add(db_action)
+    return user_id

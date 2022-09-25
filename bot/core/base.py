@@ -33,6 +33,7 @@ class AudioBase:
         with sr.AudioFile(self.file_path) as source:
             audio = r.record(source)
         logger.info('speech recognized')
+        os.remove(self.file_path)
         return r.recognize_google(audio, language='ru')
 
 
