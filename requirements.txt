@@ -6,3 +6,5 @@ pydantic
 sqlalchemy
 alembic
 psycopg2-binary
+pydantic[dotenv]
+ffmpeg
