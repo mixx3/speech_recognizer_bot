@@ -16,7 +16,7 @@ async def create_user_if_not_exists(session: Session, tg_id: int) -> None:
     if not res.one_or_none():
         session.add(user)
     else:
-        res.update(dict(telegram_id=tg_id))
+        res.update(dict(chat_id=tg_id))
     session.flush()
 
 
