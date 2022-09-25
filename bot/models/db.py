@@ -14,7 +14,7 @@ class ActionType(str, enum.Enum):
 
 class User(Base):
     id = Column(sqlalchemy.Integer, primary_key=True, nullable=False, autoincrement=True)
-    telegram_id = Column(sqlalchemy.Integer, primary_key=True, nullable=False)
+    chat_id = Column(sqlalchemy.Integer, primary_key=True, nullable=False)
     last_use = Column(sqlalchemy.DateTime, nullable=False, default=datetime.utcnow(), onupdate=datetime.utcnow())
 
 
