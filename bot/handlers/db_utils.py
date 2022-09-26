@@ -23,7 +23,6 @@ async def create_user_if_not_exists(session: Session, tg_id: int) -> int:
 
 async def post_action(session: Session, user_tg_id: int, action: str) -> None:
     user_id = await create_user_if_not_exists(session, user_tg_id)
-    user.update(dict(chat_id=user_tg_id, last_use=datetime.datetime.utcnow()))
     db_action = ActionInfo(user_id=user_id, user_action=action, date=datetime.datetime.utcnow())
     session.add(db_action)
     session.flush()
